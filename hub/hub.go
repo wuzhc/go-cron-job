@@ -1,12 +1,11 @@
-package crontab
+package hub
 
 import (
+	"cron-job/cron"
 	"errors"
 	"sync"
 
 	"github.com/astaxie/beego"
-
-	"github.com/robfig/cron"
 )
 
 var (
@@ -63,8 +62,15 @@ func ResumeJob(id int) error {
 }
 
 // 删除任务
-func RemoveJob(id int) error {
-	return nil
+func RemoveJob(id int) {
+	cronManger.RemoveJob(func(e *cron.Entry) bool {
+		if j, ok := e.Job.(*Job); ok {
+			if j.Id == id {
+				return true
+			}
+		}
+		return false
+	})
 }
 
 // 停止所有任务

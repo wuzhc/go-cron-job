@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "cron-job/crontab"
+	_ "cron-job/hub"
 	_ "cron-job/routers"
 
 	"github.com/astaxie/beego"
