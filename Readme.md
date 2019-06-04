@@ -1,3 +1,9 @@
+## 说明
+- 基于beego框架
+- 引用cron library  [https://github.com/robfig/cron](https://github.com/robfig/cron)
+- 参考代码 [https://github.com/george518/PPGo_Job](https://github.com/george518/PPGo_Job)
+
+## http api
 ```bash
 # 添加任务
 /jobs/add?cmd="xx"
