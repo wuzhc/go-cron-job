@@ -83,24 +83,6 @@ func StartAllJobs() {
 	cronManger.Start()
 }
 
-// 所有任务状态
-func Status() []map[string]int {
-	res := make([]map[string]int, 0)
-
-	entries := cronManger.Entries()
-	for _, e := range entries {
-		if j, ok := e.Job.(*Job); ok {
-			var jobInfo = make(map[string]int)
-			jobInfo["failNum"] = j.FailNum
-			jobInfo["successNum"] = j.SuccessNum
-			jobInfo["jobId"] = j.Id
-			res = append(res, jobInfo)
-		}
-	}
-
-	return res
-}
-
 // 获取所有任务
 func GetAllJobs() []*Job {
 	entries := cronManger.Entries()
@@ -125,4 +107,33 @@ func GetJobById(id int) *Job {
 	}
 
 	return nil
+}
+
+type jobInfo struct {
+	Id         int    `json:"id"`
+	Cmd        string `json:"cmd"`
+	Status     int    `json:"status"` //0准备,1进行中,2暂停
+	FailNum    int    `json:"fail_num"`
+	SuccessNum int    `json:"success_num"`
+}
+
+// 所有任务状态
+func Status() []jobInfo {
+	res := make([]jobInfo, 0)
+
+	entries := cronManger.Entries()
+	for _, e := range entries {
+		if j, ok := e.Job.(*Job); ok {
+			info := jobInfo{
+				Id:         j.Id,
+				Cmd:        j.Cmd,
+				Status:     j.Status,
+				FailNum:    j.FailNum,
+				SuccessNum: j.SuccessNum,
+			}
+			res = append(res, info)
+		}
+	}
+
+	return res
 }

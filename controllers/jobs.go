@@ -79,7 +79,6 @@ func (c *JobsController) StartJob() {
 // 所有任务状态
 func (c *JobsController) Status() {
 	res := hub.Status()
-	data := make(map[string]interface{})
-	data["status"] = res
-	c.RspData(data)
+	c.Data["json"] = res
+	c.ServeJSON()
 }
