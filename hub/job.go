@@ -124,7 +124,7 @@ func (j *Job) Run() {
 			beego.Error(err, "等待问题")
 		} else {
 			j.successChan <- struct{}{}
-			beego.Info("正常执行", "任务ID为:", j.Id)
+			// beego.Info("正常执行", "任务ID为:", j.Id)
 			beego.Info(stdout.String())
 		}
 	}

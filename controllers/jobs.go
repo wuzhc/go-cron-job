@@ -65,13 +65,13 @@ func (c *JobsController) Resume() {
 }
 
 // 停止所有任务
-func (c *JobsController) StopJob() {
+func (c *JobsController) Stop() {
 	hub.StopAllJobs()
 	c.RspSuccess("停止成功")
 }
 
 // 开始所有任务
-func (c *JobsController) StartJob() {
+func (c *JobsController) Start() {
 	hub.StartAllJobs()
 	c.RspSuccess("开始成功")
 }
